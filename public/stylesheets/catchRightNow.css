@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'nintendoP_Humming-E002pr-AlphaNum';
+    src: url('nintendoP_Humming-E_002pr.otf') format('otf');
+    src: url('nintendoP_Humming-E_002pr.otf') format('opentype'), 
+         url('nintendoP_Humming-E002pr-AlphaNum.eot?#iefix') format('embedded-opentype'),
+         url('nintendoP_Humming-E002pr-AlphaNum.svg#nintendoP_Humming-E002pr-AlphaNum') format('svg'),
+         url('nintendoP_Humming-E002pr-AlphaNum.ttf') format('truetype'),
+         url('nintendoP_Humming-E002pr-AlphaNum.woff') format('woff'),
+         url('nintendoP_Humming-E002pr-AlphaNum.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
+body {
+    background-image: url("../images/thumb-1920-956578.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+table.dataTable {
+    overflow-x: scroll;
+    font-family: 'nintendoP_Humming-E002pr-AlphaNum', Arial, sans-serif;
+    font-size: 12px;
+}
+.dataTables_wrapper {
+    overflow-x: scroll;
+    font-family: 'nintendoP_Humming-E002pr-AlphaNum', Arial, sans-serif;
+    font-size: 12px;
+}
+

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.3/b-1.5.6/cr-1.5.0/r-2.2.2/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.3/b-1.5.6/cr-1.5.0/r-2.2.2/datatables.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/catchRightNow.css">
+    <script>
+        $(document).ready( function () {
+            var lol = $('#fish_id').DataTable({"scrollX": true, columnDefs: [
+            { width: "240px", targets: 3 }
+        ], scrollCollapse: true, "autowidth": true});
+            var lol1 = $('#bugs_id').DataTable({"scrollX": true, scrollCollapse: true, "autowidth": true});
+            var lol2 = $('#dsc_id').DataTable({"scrollX": true, columnDefs: [
+            { width: "230px", targets: 2 }
+        ], scrollCollapse: true, "autowidth": true});
+            setTimeout( function () {
+            lol.fnAdjustColumnSizing();
+            lol1.fnAdjustColumnSizing();
+            lol2.fnAdjustColumnSizing();
+            }, 10 );
+        }
+         );
+        
+    </script>
+</head>
+
+<body>
+    <!-- https://stackoverflow.com/questions/807878/javascript-that-executes-after-page-load 
+         Code that executes script after page load -->
+        <script type="text/javascript">
+            function downloadJSAtOnload() {
+                var element = document.createElement("script");
+                element.src = "javascripts/slideshow.js";
+                document.body.appendChild(element);
+            }
+
+            if (window.addEventListener)
+                window.addEventListener("load", downloadJSAtOnload, false);
+            else if (window.attachEvent)
+                window.attachEvent("onload", downloadJSAtOnload);
+            else window.onload = downloadJSAtOnload;
+        </script>
+    <table data-scroll-y="300px" id="fish_id" class="display" width="100%">
+        <caption>Fish at <%= time %></caption>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Location</td>
+                <td>Shadow Size</td>
+                <td>Time</td>
+                <td>January</td>
+                <td>February</td>
+                <td>March</td>
+                <td>April</td>
+                <td>May</td>
+                <td>June</td>
+                <td>July</td>
+                <td>August</td>
+                <td>September</td>
+                <td>October</td>
+                <td>November</td>
+                <td>December</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i = 0; i < fishrows.length; i++) { %>
+                <tr>
+                    <td><%= fishrows[i].name %></td>
+                    <td><%= fishrows[i].price %></td>
+                    <td><%= fishrows[i].location %></td>
+                    <td><%= fishrows[i].ShadowSize %></td>
+                    <td><%= fishrows[i].time %></td>
+                    <td><%= fishrows[i].january %></td>
+                    <td><%= fishrows[i].february %></td>
+                    <td><%= fishrows[i].march %></td>
+                    <td><%= fishrows[i].april %></td>
+                    <td><%= fishrows[i].may %></td>
+                    <td><%= fishrows[i].june %></td>
+                    <td><%= fishrows[i].july %></td>
+                    <td><%= fishrows[i].august %></td>
+                    <td><%= fishrows[i].september %></td>
+                    <td><%= fishrows[i].october %></td>
+                    <td><%= fishrows[i].november %></td>
+                    <td><%= fishrows[i].december %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <table data-scroll-y="300px" id="bugs_id" class="display" width="100%">
+        <caption>Bugs at <%= time %></caption>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Location</td>
+                <td>Time</td>
+                <td>January</td>
+                <td>February</td>
+                <td>March</td>
+                <td>April</td>
+                <td>May</td>
+                <td>June</td>
+                <td>July</td>
+                <td>August</td>
+                <td>September</td>
+                <td>October</td>
+                <td>November</td>
+                <td>December</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i = 0; i < bugrows.length; i++) { %>
+                <tr>
+                    <td><%= bugrows[i].name %></td>
+                    <td><%= bugrows[i].price %></td>
+                    <td><%= bugrows[i].location %></td>
+                    <td><%= bugrows[i].time %></td>
+                    <td><%= bugrows[i].january %></td>
+                    <td><%= bugrows[i].february %></td>
+                    <td><%= bugrows[i].march %></td>
+                    <td><%= bugrows[i].april %></td>
+                    <td><%= bugrows[i].may %></td>
+                    <td><%= bugrows[i].june %></td>
+                    <td><%= bugrows[i].july %></td>
+                    <td><%= bugrows[i].august %></td>
+                    <td><%= bugrows[i].september %></td>
+                    <td><%= bugrows[i].october %></td>
+                    <td><%= bugrows[i].november %></td>
+                    <td><%= bugrows[i].december %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <!-- width is important, helps headers from misaligning with columns -->
+    <table data-scroll-y="300px" id="dsc_id" class="display" width="100%">
+        <caption>Deep Sea Creatures at <%= time %></caption>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Shadow Size</td>
+                <td>Time</td>
+                <td>January</td>
+                <td>February</td>
+                <td>March</td>
+                <td>April</td>
+                <td>May</td>
+                <td>June</td>
+                <td>July</td>
+                <td>August</td>
+                <td>September</td>
+                <td>October</td>
+                <td>November</td>
+                <td>December</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i = 0; i < dscrows.length; i++) { %>
+                <tr>
+                    <td><%= dscrows[i].name %></td>
+                    <td><%= dscrows[i].price %></td>
+                    <td><%= dscrows[i].ShadowSize %></td>
+                    <td><%= dscrows[i].time %></td>
+                    <td><%= dscrows[i].january %></td>
+                    <td><%= dscrows[i].february %></td>
+                    <td><%= dscrows[i].march %></td>
+                    <td><%= dscrows[i].april %></td>
+                    <td><%= dscrows[i].may %></td>
+                    <td><%= dscrows[i].june %></td>
+                    <td><%= dscrows[i].july %></td>
+                    <td><%= dscrows[i].august %></td>
+                    <td><%= dscrows[i].september %></td>
+                    <td><%= dscrows[i].october %></td>
+                    <td><%= dscrows[i].november %></td>
+                    <td><%= dscrows[i].december %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+
+
+</body>
+</html

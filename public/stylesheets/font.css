@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'nintendoP_Humming-E002pr-AlphaNum';
+  src: url('nintendoP_Humming-E002pr-AlphaNum.eot');
+  src: url('nintendoP_Humming-E002pr-AlphaNum.eot?#iefix') format('embedded-opentype'),
+       url('nintendoP_Humming-E002pr-AlphaNum.svg#nintendoP_Humming-E002pr-AlphaNum') format('svg'),
+       url('nintendoP_Humming-E002pr-AlphaNum.ttf') format('truetype'),
+       url('nintendoP_Humming-E002pr-AlphaNum.woff') format('woff'),
+       url('nintendoP_Humming-E002pr-AlphaNum.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
