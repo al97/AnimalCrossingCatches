@@ -42,17 +42,40 @@ Having gone through all the demo modules in the w3schools tutorial, I wrote crea
 Run connection.connect - and the file names should be self explanatory. Got different functions for creating tables, populating them, dropping them, and displaying them through the console.
 
 
-# Step 4: Creating Express App (displaying collected Node data on HTML)
+# Step 4: Displaying collected Node data on HTML through EJS
 
 Where the fun starts...
 
+Not really. First things first, wrote the query that would return all the fish, bugs, and DSC's that would be available to us at our given time (Date() object). Then, I use a function to set a variable to these query values (array), because of how SQL queries and database connections work in Node. They're... how should I say - they don't happen when they appear in the code, if that makes sense. So if I include a connection to a database, and I try to end it in the same code, the query doesn't work.
 
+That should help explain why it's necessary to transport the SQL query results to a separate variable - otherwise, we don't know when we can access these results.
 
+Then, I send this data into a viewing engine EJS. JavaScript template, lets me send objects to an html file with <% %>.
+
+First things first, wrote for loops through <% %> in order to display all the rows and columns easily - just iterate through the array object passed in from the node code. Before this, I decided to use Datatables, a table plug-in through Jquery that I think is pretty clean and has some good functionality. So it was just a matter of using <td><%= fishrows[i].name %></td> a bunch of times, setting up the table tags, and including a link at the <head> of the html file that would convert it to Datatables' format.
+  
+That was all well and good, and I wanted to be able to choose which table I wanted to look at, like a slideshow. https://www.w3schools.com/howto/howto_js_slideshow.asp - used this link. So only one table is viewable at a time, can click on arrow buttons to move between them. Then, wanted to make sure the table stayed a certain size and not any larger, so I added scrolling options that Datatables provides for their tables.
+
+Something that was a pain with adding the slideshows was that Datatables uses the table format you've given them, and shoves each table into its own wrapper. What that means is that the slideshow function didn't implement itself properly - I had to first rename the class that the slideshow was working with to the datatable wrapper, and even then it wouldn't work until I clicked the button to move slides first - you'll understand when you look at the code, but essentially the slideshow gathers all html elements of a certain kind of class and allows you to move between them, blocking from view the others. So, the elements wouldn't gather themselves until I clicked the arrow button because they were now under a different class - the datatable wrapper rather than the <table> element.
+  
+So I had to include a script that would execute the slideshow script AFTER the page was load and the tables were already at this point renamed to their proper wrapper names.
+
+Then, I had to figure out how to deal with adding static files to EJS - this involved making this singular node file into an express app, in order to access the stylesheets and images that I had written.
+
+Making it into an express app was relatively simple - just followed their tutorial which is the first thing you see when you visit their homepage. Had some trouble understanding what exactly was happening, but once I did I wrote my stylesheet, copy pasted my node code into app.js, and ran it through - it all worked, so background images and fonts could be added to my website.
+
+Running it locally, it looks all good. Time to set it up on Elastic Beanstalk and make it accessible to the web.
 
 
 # Step 5: Migrating Express App into AWS Elastic Beanstalk
 
 My goodness, this part was actually kind of difficult. So many bugs / errors ran into...
+
+Elastic Beanstalk is incredibly convenient. However, importing the Node app to elastic beanstalk was pretty difficult... had to deal with reinstalling Node and npm on the EC2 instance, ran into lots of errors regarding symbolic links that were setup properly on my own system but weren't once they were transported to EC2.
+
+Didn't have to reinstall in the end - just needed to install mysql on my own system into the node_modules folder that I have in the express app. Although I sure tried reinstalling...
+
+Finally, made my Route 53 domain name bertkim.com reroute to the Elastic Beanstalk url - relatively simple, but this brought a styling error that I presume was because google chrome uses webkit? I'm really not sure what happened here since it worked fine with the original Elastic Beanstalk url, but when I rerouted the traffic through my domain name, the headers were misaligned with the columns of the table. Adding width=100% to each <html> tag worked here to make it look better - it works on all browsers just fine now.
 
 
 # What's Next?
