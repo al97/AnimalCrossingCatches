@@ -84,3 +84,37 @@ Finally, made my Route 53 domain name bertkim.com reroute to the Elastic Beansta
 - Adding login system so that I can help people catalogue their collections - I'll let them bulk import through CSV since that was something people wanted from what I've read about the ACNL guide app on the App Store.
 - Adding landing page that's simple but clean.
 - Making mobile views much cleaner (adjusting background image to the browser) and making it less vulnerable to changing browser sizes.
+
+# Step 6 - Adding Login System and Navigation (Home Page, About Page)
+
+Adding a login system entails a lot of things:
+- 2 more tables: one to store user login data, one to store catalogs
+- Different links to move to and from each place
+- Link that leads you to input where you can add your catches
+- Ability to register
+- Error handling for login information
+
+As soon as you add the ability for the user to do something, the web app becomes much more complicated...
+First things first, added a simple form that let's you login on html and had it send this post data to /auth, which will handle all the verification - check to see that it's a registered user and that the password is correct. If all qualifications are met, it'll redirect you to your catalogue, which is initially empty. Also tracks percentage to completion based on simple query.
+
+Did the same for a register.html link - this one checks to see if your user information exists in the table, and if it doesn't, you're allowed to register with your username and password.
+
+Adding your catch data was also handled the same way as both login and register - I know, there's probably way better ways to do this, and this doesn't allow you to bulk import your catches - I should probably add CSV support at some point. But for now, you add your catch, its record weight, and the type of creature it is so that I know to add it to the Fish, Bugs, or DSC table.
+
+Before we move on, I wanted to program error handling for login and register: I wanted different messages to pop up that were context-sensitive, like if you entered the wrong information, or if your register information exists in the table already, or when you're inputting catch data if the creature you inputted actually does exist in the game. Installed connect-flash for this. Basically, you can store messages when the request is made and output them in EJS if a message is stored. So, if a message was stored (an error occurred), I stored the message so that it could be printed on the client-side javascript view. If you try to add something that's not a fish, it'll redirect to the add catch page and display the message. If you login with the wrong information, it'll redirect to login and tell you that you did. If you register and your info is added to the table, you are redirected to the login page with the message that says you succesfully registered - now login!
+
+The messaging was actually difficult because I had to deal with this HTTP header issue where you can't send two responses in a row - beautiful explanation here https://stackoverflow.com/questions/7042340/error-cant-set-headers-after-they-are-sent-to-the-client?rq=1, but basically I wasn't really understanding how asynchronous IO worked in Node and needed to understand how states worked. Also, I was tearing my hair out with the issue until I realized I called res.end() after submitting a response to redirect already. You can’t send responses past a certain point so you gotta comb through to find all the responses you are sending incorrectly / extraneously - this was typically the bug but the explanations really helped me understand Node better.
+
+Now that we have all these links, it's time to give them access to each other. I used a navbar template from Bootstrap, which messed up the styling of alot of different pages used here because I wasn't using Bootstrap previously. HTML tag select was getting cut in half, the padding was all messed up. After customizing the CSS for each of these elements (particularly the datatables), I also had to make sure that you could see two different navbars - one that reflected your login information, and one that reflected the fact that you weren't logged in yet. Simple matter of using EJS to display login information if you were logged in, and take away the login and register button and replace it with a logout button. If you weren't logged in, show the login and register button and take away your logout button. Redirected the Your Catalog button to the login page if you weren't logged in yet.
+
+Home page and about page are very simple - Home page is a homage to Animal Crossing: Wild World, where the bulletin board would show random messages every week or so. I had it pull a random message from all the messages in the game (credits to https://github.com/Helmasaur/ac-keijiban for the messages) by using Math.random() and shoving all the messages in an array. The about page is a simple description about what this project is and who I am.
+
+# Back to Step 1 - Actually getting the user's time
+
+The final thing I had to fix was actually the entire idea behind the project - my Express application was reflecting UTC time because the app was pulling the time from the hosting server and pulling the queries according to the server's datetime. To get around this, I decided to use an auto submit form that took your current hour and month, and automatically submitted it as a post request to the app, which would then use this information to return the accurate data. 
+
+# More?
+- Front-end work. This site... reminds me of much older webpages where the background is always a static image. I'm sure this site looks terrible on mobile and barely adapts to changing browser sizes (other than the navbar). I'll definitely work on this soon.
+- Adding catches - I want people to be able to bulk import their catch data so that they can add more than one catch at a time.
+- 
+
