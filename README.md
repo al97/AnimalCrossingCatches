@@ -116,5 +116,3 @@ The final thing I had to fix was actually the entire idea behind the project - m
 # More?
 - Front-end work. This site... reminds me of much older webpages where the background is always a static image. I'm sure this site looks terrible on mobile and barely adapts to changing browser sizes (other than the navbar). I'll definitely work on this soon.
 - Adding catches - I want people to be able to bulk import their catch data so that they can add more than one catch at a time.
-- 
-
